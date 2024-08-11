@@ -1,8 +1,8 @@
 const express = require("express");
-const app = express();
 const path = require('path');
-const router = express.Router();
 const { engine } = require("express-handlebars");
+//const routesAdmin = require('./routes/rotaAbout');
+const app = express();
 
 app.engine('handlebars', engine({
   defaultLayout: 'main',
@@ -12,18 +12,14 @@ app.engine('handlebars', engine({
   }
 }));
 
-app.set('view engine', 'handlebars');
-
-router.get('/', function (req, res) {
-  res.render('index');
+// Teste simples de rota
+app.get('/', (req, res) => {
+  res.send('Rota principal funcionando!');
 });
 
-router.get('/about', function (req, res) {
-  res.sendFile(path.join(__dirname + '/about.html'));
-});
+//app.set('view engine', 'handlebars');
+//app.use('/', routesAdmin);
 
-app.use('/', router);
-
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Servidor rodando");
 });
